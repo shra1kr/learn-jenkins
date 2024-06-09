@@ -32,8 +32,8 @@ pipeline {
             }
         }
         environment {
-            name: 'DEPLOY_TO', value: 'production'
-            name: 'GREETING', value: 'Good Morning'
+            DEPLOY_TO =  'production'
+            GREETING =  'Good Morning'
         }
         stage ('print params') {
             steps {
@@ -44,6 +44,17 @@ pipeline {
                 echo "Password: ${params.PASSWORD}"
                 echo "triggered test again"
             }
-        }    
+        }         
+    }
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+        }
+        success { 
+                echo 'I will run when pipeline is success'
+        }
+        failure { 
+                echo 'I will run when pipeline is failure'
+        }
     }
 }
